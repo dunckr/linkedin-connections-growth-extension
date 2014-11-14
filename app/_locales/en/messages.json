@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "linkedin connection expander",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "connect with more users",
+    "description": "The description of the application"
+  }
+}

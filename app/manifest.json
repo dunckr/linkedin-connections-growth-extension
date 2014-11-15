@@ -10,8 +10,7 @@
     "default_locale": "en",
     "background": {
         "scripts": [
-            "scripts/chromereload.js",
-            "scripts/background.js"
+            "scripts/chromereload.js"
         ]
     },
     "browser_action": {
@@ -22,21 +21,9 @@
         "default_title": "linkedin connection expander",
         "default_popup": "popup.html"
     },
-    "content_scripts": [{
-        "matches": [
-            "http://*/*",
-            "https://*/*"
-        ],
-        "css": [
-            "styles/main.css"
-        ],
-        "js": [
-            "scripts/contentscript.js"
-        ],
-        "run_at": "document_end",
-        "all_frames": false
-    }],
     "permissions": [
-        "tabs"
+        "tabs",
+        "http://*/*",
+        "https://*/*"
     ]
 }

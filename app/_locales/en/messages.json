@@ -1,10 +1,10 @@
 {
-  "appName": {
-    "message": "linkedin connection expander",
-    "description": "The name of the application"
-  },
-  "appDescription": {
-    "message": "connect with more users",
-    "description": "The description of the application"
-  }
+    "appName": {
+        "message": "LinkedIn Connections Growth",
+        "description": "expanding your business contacts"
+    },
+    "appDescription": {
+        "message": "network passively",
+        "description": "expanding your business contacts"
+    }
 }

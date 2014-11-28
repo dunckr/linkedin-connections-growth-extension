@@ -1,14 +1,52 @@
-div {
-    cursor: pointer;
-    text-align: center;
-    padding: 1px 3px;
-    font-family: sans-serif;
-    font-size: 0.8em;
-    width: 100px;
-    margin-top: 1px;
-    background: #cccccc;
+body {
+    width: 200px;
+    height: 300px;
 }
-
-#start {
-  // disabled
+header {
+    padding-bottom: 70px;
+}
+.bg {
+    background: url("../images/header.png") center center no-repeat;
+    width: 200px;
+    height: 160px;
+}
+.settings {
+    background: url("../images/settings-clear.png") center center no-repeat;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.settings:hover {
+    background-image: url("../images/settings-fill.png");
+}
+.btn {
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 1px solid #979797;
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.50);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.50);
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #03A6ED;
+    font-size: 18px;
+    line-height: 43px;
+    text-align: center;
+}
+.btn:hover {
+    background: #03A6ED;
+    color: #FFFFFF;
+}
+.disabled {
+    cursor: default;
+    color: #D7F1FC;
+    border: 1px solid #E6E6E6;
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+}
+.disabled:hover {
+    color: #D7F1FC;
+    background: #FFFFFF;
 }

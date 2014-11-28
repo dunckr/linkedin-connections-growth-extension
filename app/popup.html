@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
+    <link href="bower_components/animate.css/animate.min.css" rel="stylesheet">
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
     <link href="styles/main.css" rel="stylesheet">
@@ -13,13 +12,18 @@
 </head>
 
 <body>
-    <button type="submit" id="route">GoToPage</button>
-    <button type="submit" id="start">Start</button>
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
+    <header>
+        <div class="bg"></div>
+        <div class="settings"></div>
+    </header>
+    <section>
+        <div id="route" class="btn">Visit LinkedIn</div>
+        <div id="start" class="btn disabled">Grow Connections</div>
+    </section>
 
+    <!-- build:js scripts/vendor.js -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- endbuild -->
     <!-- build:js scripts/popup.js -->
     <script src="scripts/popup.js"></script>
     <!-- endbuild -->

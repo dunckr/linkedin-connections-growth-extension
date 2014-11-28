@@ -19,6 +19,12 @@ function start() {
     });
 }
 
+function getOptions() {
+    return {
+        maxVisits: 1
+    };
+}
+
 function inject() {
     chrome.tabs.executeScript(null, {
         file: 'bower_components/jquery/dist/jquery.min.js'
@@ -26,17 +32,27 @@ function inject() {
         chrome.tabs.executeScript(null, {
             file: 'scripts/linkedin.js'
         }, function() {
-            // should probably set maxtimes to visit
-            //chrome.tabs.sendRequest(tabId, {scriptOptions: {param1:'value1',param2:'value2'}}, function(){
+            var options = getOptions();
+            sendMessage(options);
         });
     });
 }
 
+function sendMessage(options) {
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true
+    }, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, options);
+    });
+}
+
 function enableButton() {
-    // enable the start button
+    document.getElementById('start').disabled = true
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    $('#route').addClass('animated bounce');
     document.getElementById('route').onclick = route;
     document.getElementById('start').onclick = start;
 });

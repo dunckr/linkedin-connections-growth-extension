@@ -2,14 +2,28 @@
 
 var Linkedin = function() {};
 
-Linkedin.prototype.run = function() {
-    // add extra ones?
-    this.nextUsers();
-    // might need to get all and add harvested ones
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+        "from a content script:" + sender.tab.url :
+        "from the extension");
+    console.log(request);
+    if (request.greeting === "hello")
+        sendResponse({
+            farewell: "goodbye"
+        });
+});
 
-    var newUsers = this.getNewUsers();
-    this.harvesting(newUsers, this.shouldVisit);
-};
+//var linkedin = new Linkedin();
+//linkedin.run();
+
+//Linkedin.prototype.run = function() {
+//// add extra ones?
+//this.nextUsers();
+//// might need to get all and add harvested ones
+
+//var newUsers = this.getNewUsers();
+//this.harvesting(newUsers, this.shouldVisit);
+//};
 
 
 Linkedin.prototype.harvesting = function(newUsers, done) {
@@ -85,6 +99,3 @@ Linkedin.prototype.visit = function(id, done) {
     // chrome.tabs.remove
     done();
 };
-
-var linkedin = new Linkedin();
-linkedin.run();

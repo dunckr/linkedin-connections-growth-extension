@@ -4,7 +4,8 @@
   "dependencies": {
     "chai": "~1.8.0",
     "mocha": "~1.14.0",
-    "sinon": "~1.12.1"
+    "sinon": "~1.12.1",
+    "animate.css": "~3.2.0"
   },
   "devDependencies": {}
 }

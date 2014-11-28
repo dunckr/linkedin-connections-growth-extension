@@ -3,43 +3,64 @@
 var Linkedin = function() {};
 
 Linkedin.prototype.run = function() {
+    // add extra ones?
     this.nextUsers();
-    var users = this.getUsers();
-    this.harvesting(users);
-    // once harvested new users
-    // vist the ones that shouldvisit
+    // might need to get all and add harvested ones
+
+    var newUsers = this.getNewUsers();
+    this.harvesting(newUsers, this.shouldVisit);
 };
 
-// determining whether should save or not?
-Linkedin.prototype.harvesting = function(users) {
-    //$.map(users, )
-    // check if they exist
-    // if not then save them
-    this.get(users[0], function(data) {
-        if (chrome.extension.lastError) {
-            console.warn("lastError:" + chrome.extension.lastError.message);
-        } else {
-            console.log(data);
-        }
+
+Linkedin.prototype.harvesting = function(newUsers, done) {
+    this.getAll(function(exisitingUsers) {
+        var users = $.extend(true, exisitingUsers, newUsers);
+        this.save(users, function() {
+            done(users);
+        });
     });
 };
 
 Linkedin.prototype.shouldVisit = function(users) {
-    // if visit < 0
+    var _this = this;
+    $.each(users, function(key, user) {
+        if (user.numberOfVisits === undefined) {
+            //
+            // _this.viist key
+            // users[key] .numberofvisits = 1
+        } else if (user.numberOfVisits < MAX_VISITS) {
+            // _this.viist key
+            // users[key] .numberofvisits = ++
+        }
+    });
+    // completed!
+    // send notification that has done
 };
 
-Linkedin.prototype.getUsers = function() {
-    var $els = $('.entityblock');
-    return $.map($els, this.extractUser);
+Linkedin.prototype.userEls = function() {
+    return $('.entityblock');
+};
+
+Linkedin.prototype.getNewUsers = function() {
+    var $els = this.userEls();
+    var users = {};
+    var _this = this;
+    $.each($els, function(key, el) {
+        var user = _this.extractUser(el);
+        $.extend(users, user);
+    });
+    return users;
 };
 
 Linkedin.prototype.extractUser = function(el) {
     var $el = $(el),
-        url = $el.find('.image').attr('href');
-    return {
-        id: url.match(/[?id]=([^&]*)/)[1],
-        name: $el.find('.name').text(),
+        url = $el.find('.image').attr('href'),
+        id = url.match(/[?id]=([^&]*)/)[1];
+    var user = {};
+    user[id] = {
+        name: $el.find('.title').prop('title'),
     };
+    return user;
 };
 
 Linkedin.prototype.nextUsers = function() {
@@ -47,19 +68,23 @@ Linkedin.prototype.nextUsers = function() {
 };
 
 Linkedin.prototype.save = function(item, done) {
-    chrome.storage.sync.set(item, done);
+    chrome.storage.local.set(item, done);
 };
 
 Linkedin.prototype.get = function(item, done) {
-    chrome.storage.sync.get(item, done);
+    chrome.storage.local.get(item, done);
 };
 
-Linkedin.prototype.sync = function(item, done) {
-    chrome.storage.sync.get(item, done);
+Linkedin.prototype.getAll = function(done) {
+    this.get(null, done);
 };
 
-// chrome.tabs.remove
-// chrome.tabs.create(
+Linkedin.prototype.visit = function(id, done) {
+    var url = 'https://www.linkedin.com/profile/view?id=' + id;
+    // chrome.tabs.create(
+    // chrome.tabs.remove
+    done();
+};
 
 var linkedin = new Linkedin();
 linkedin.run();

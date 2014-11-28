@@ -35,10 +35,6 @@ header {
     line-height: 43px;
     text-align: center;
 }
-.btn:hover {
-    background: #03A6ED;
-    color: #FFFFFF;
-}
 .disabled {
     cursor: default;
     color: #D7F1FC;
@@ -49,4 +45,85 @@ header {
 .disabled:hover {
     color: #D7F1FC;
     background: #FFFFFF;
+}
+.options {
+    display: none;
+}
+.options p {
+    font-size: 13px;
+}
+.input {
+    /*float: right;*/
+    border: 1px solid #c0c8c9;
+    /*border-radius: 4px;*/
+    /*padding: .75rem;*/
+    /*margin: .375rem;*/
+    /*background-color: transparent;*/
+    /*text-align: start;*/
+    /*color: #03A6ED;*/
+    /*font-size: 18px;*/
+    /*line-height: 43px;*/
+    /*padding-bottom: 30px;*/
+}
+.input select {
+    background: transparent;
+    /*width: 268px;*/
+    /*padding: 5px;*/
+    /*font-size: 16px;*/
+    /*line-height: 1;*/
+    /*border: 0;*/
+    /*border-radius: 0;*/
+    /*height: 34px;*/
+    -webkit-appearance: none;
+}
+.banner {
+    position: absolute;
+    z-index: 100;
+    width: 300px;
+    height: 400px;
+    top: 0;
+    left: 0;
+    background: white;
+}
+.spinner {
+    display: none;
+    margin: 0 auto 0;
+    text-align: center;
+}
+.spinner > div {
+    width: 18px;
+    height: 18px;
+    background-color: #03A6ED;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+@-webkit-keyframes bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+@keyframes bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
 }

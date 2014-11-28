@@ -12,14 +12,39 @@
 </head>
 
 <body>
-    <header>
-        <div class="bg"></div>
-        <div class="settings"></div>
-    </header>
-    <section>
+    <section class="main">
+        <header>
+            <div class="bg"></div>
+            <div class="settings"></div>
+        </header>
         <div id="route" class="btn">Visit LinkedIn</div>
-        <div id="start" class="btn disabled">Grow Connections</div>
+        <div id="start" class="btn disabled">
+            <span>Grow Connections</span>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
     </section>
+    <section class="options">
+        <header>
+            <div class="settings"></div>
+        </header>
+        <p>Maximum number of times to visit a single person</p>
+        <div class="input">
+            <select class="input">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+    </section>
+    <!--<section class="banner">-->
+    <!--<h1>here</h1>-->
+    <!--</section>-->
 
     <!-- build:js scripts/vendor.js -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>

@@ -1,30 +1,14 @@
 'use strict';
 
-var Linkedin = function() {};
+var Linkedin = function(options) {
+    this.maxVisits = options.maxVisits || 2;
+};
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-        "from a content script:" + sender.tab.url :
-        "from the extension");
-    console.log(request);
-    if (request.greeting === "hello")
-        sendResponse({
-            farewell: "goodbye"
-        });
-});
-
-//var linkedin = new Linkedin();
-//linkedin.run();
-
-//Linkedin.prototype.run = function() {
-//// add extra ones?
-//this.nextUsers();
-//// might need to get all and add harvested ones
-
-//var newUsers = this.getNewUsers();
-//this.harvesting(newUsers, this.shouldVisit);
-//};
-
+Linkedin.prototype.run = function() {
+    //this.nextUsers();
+    var newUsers = this.getNewUsers();
+    this.harvesting(newUsers, this.shouldVisit);
+};
 
 Linkedin.prototype.harvesting = function(newUsers, done) {
     this.getAll(function(exisitingUsers) {
@@ -36,19 +20,22 @@ Linkedin.prototype.harvesting = function(newUsers, done) {
 };
 
 Linkedin.prototype.shouldVisit = function(users) {
-    var _this = this;
+    var _this = this,
+        toVisit = [];
     $.each(users, function(key, user) {
         if (user.numberOfVisits === undefined) {
-            //
-            // _this.viist key
-            // users[key] .numberofvisits = 1
-        } else if (user.numberOfVisits < MAX_VISITS) {
-            // _this.viist key
-            // users[key] .numberofvisits = ++
+            toVisit.push(user.id);
+            users[key].numberofvisits = 1;
+        } else if (user.numberOfVisits < this.maxVisits) {
+            toVisit.push(user.id);
+            users[key].numberofvisits += 1;
         }
     });
-    // completed!
-    // send notification that has done
+    this.visit(toVisit);
+    this.save(users, function() {
+        done(users);
+        _this.completed();
+    });
 };
 
 Linkedin.prototype.userEls = function() {
@@ -93,9 +80,26 @@ Linkedin.prototype.getAll = function(done) {
     this.get(null, done);
 };
 
-Linkedin.prototype.visit = function(id, done) {
-    var url = 'https://www.linkedin.com/profile/view?id=' + id;
-    // chrome.tabs.create(
-    // chrome.tabs.remove
-    done();
+Linkedin.prototype.visit = function(ids) {
+    this.send({
+        status: 'visit',
+        toVisit: ids
+    });
 };
+
+Linkedin.prototype.completed = function() {
+    this.send({
+        status: 'completed'
+    });
+};
+
+Linkedin.prototype.send = function(message) {
+    chrome.runtime.sendMessage(message);
+};
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.status === 'options') {
+        var linkedin = new Linkedin(request);
+        linkedin.run();
+    }
+});

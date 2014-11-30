@@ -77,11 +77,11 @@ Linkedin.prototype.nextUsers = function() {
 };
 
 Linkedin.prototype.save = function(item, done) {
-    chrome.storage.local.set(item, done);
+    chrome.storage.sync.set(item, done);
 };
 
 Linkedin.prototype.get = function(item, done) {
-    chrome.storage.local.get(item, done);
+    chrome.storage.sync.get(item, done);
 };
 
 Linkedin.prototype.getAll = function(done) {

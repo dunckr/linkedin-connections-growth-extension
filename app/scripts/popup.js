@@ -82,14 +82,20 @@ function visitLinkedin() {
             animateHover($('#route'), 'pulse');
             // On LinkedIn
         } else {
-            $('#route')
-                .addClass('disabled')
-                .unbind('click mouseenter mouseleave');
-            $('#start')
-                .removeClass('disabled')
-                .addClass('animated bounce')
-                .click(start);
-            animateHover($('#start'), 'pulse');
+            $('.spinner').show();
+            $('#start span').text('');
+            setTimeout(function() {
+                $('.spinner').hide();
+                $('#start span').text('Grow Connections');
+                $('#route')
+                    .addClass('disabled')
+                    .unbind('click mouseenter mouseleave');
+                $('#start')
+                    .removeClass('disabled')
+                    .addClass('animated bounce')
+                    .click(start);
+                animateHover($('#start'), 'pulse');
+            }, 2000);
         }
     });
 }
@@ -116,6 +122,10 @@ function stopSpinner() {
     $('.spinner').hide();
     $('#start span').text('Completed');
     animateHover($('.twitter'), 'shake');
+    $('#start').unbind().click(function() {
+        $('.main').hide();
+        $('.options').show();
+    });
 }
 
 function animateHover($el, animation) {

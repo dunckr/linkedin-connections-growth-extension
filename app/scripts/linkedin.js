@@ -5,15 +5,24 @@ var Linkedin = function(options) {
 };
 
 Linkedin.prototype.run = function() {
-    //this.nextUsers();
-    var newUsers = this.getNewUsers();
-    this.harvesting(newUsers, this.shouldVisit);
+    this.nextUsers();
+    var newUsers = this.getNewUsers(),
+        toVisit = [],
+        _this = this;
+    this.harvesting(newUsers, function(users) {
+        var response = _this.shouldVisit(users);
+        _this.save(response.users, function() {});
+        _this.visit(response.toVisit, function() {
+            _this.completed();
+        });
+    });
 };
 
 Linkedin.prototype.harvesting = function(newUsers, done) {
+    var _this = this;
     this.getAll(function(exisitingUsers) {
         var users = $.extend(true, exisitingUsers, newUsers);
-        this.save(users, function() {
+        _this.save(users, function() {
             done(users);
         });
     });
@@ -24,18 +33,17 @@ Linkedin.prototype.shouldVisit = function(users) {
         toVisit = [];
     $.each(users, function(key, user) {
         if (user.numberOfVisits === undefined) {
-            toVisit.push(user.id);
-            users[key].numberofvisits = 1;
+            toVisit.push(key);
+            users[key].numberOfVisits = 1;
         } else if (user.numberOfVisits < this.maxVisits) {
-            toVisit.push(user.id);
-            users[key].numberofvisits += 1;
+            toVisit.push(key);
+            users[key].numberOfVisits += 1;
         }
     });
-    this.visit(toVisit);
-    this.save(users, function() {
-        done(users);
-        _this.completed();
-    });
+    return {
+        toVisit: toVisit,
+        users: users
+    };
 };
 
 Linkedin.prototype.userEls = function() {

@@ -15,6 +15,7 @@ function visit(ids, done) {
         });
     });
     done(tabs);
+    stopSpinner();
 }
 
 function closeTabs(tabs) {

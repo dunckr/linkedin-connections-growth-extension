@@ -4,17 +4,15 @@ var page = 'https://www.linkedin.com/people/pymk',
     connectionPage = 'https://www.linkedin.com/profile/view?id=';
 
 function visit(ids, done) {
-    var tabs = [];
     $.each(ids, function(key, id) {
         var url = connectionPage + id;
         chrome.tabs.create({
             active: false,
             url: url
         }, function(tab) {
-            tabs.push(tab.id);
+            //closeTabs(tab.id);
         });
     });
-    done(tabs);
     stopSpinner();
 }
 
@@ -69,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         $('.options').toggle();
     });
     animateHover($('.settings'), 'pulse');
-
     visitLinkedin();
 });
 

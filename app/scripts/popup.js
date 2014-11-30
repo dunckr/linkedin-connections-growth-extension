@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('.options').toggle();
     });
     animateHover($('.settings'), 'pulse');
+    animateHover($('.twitter'), 'pulse');
     visitLinkedin();
 });
 
@@ -114,6 +115,7 @@ function showSpinner() {
 function stopSpinner() {
     $('.spinner').hide();
     $('#start span').text('Completed');
+    animateHover($('.twitter'), 'shake');
 }
 
 function animateHover($el, animation) {

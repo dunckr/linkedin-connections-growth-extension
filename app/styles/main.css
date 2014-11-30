@@ -10,6 +10,15 @@ header {
     width: 200px;
     height: 160px;
 }
+.twitter {
+    background: url("../images/twitter.png") center center no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+}
 .settings {
     background: url("../images/settings-clear.png") center center no-repeat;
     position: absolute;

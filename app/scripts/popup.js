@@ -80,10 +80,12 @@ function visitLinkedin() {
                 .addClass('animated bounce')
                 .click(route);
             animateHover($('#route'), 'pulse');
+            $('.status').text('Need to visit the PYMK LinkedIn page');
             // On LinkedIn
         } else {
             $('.spinner').show();
             $('#start span').text('');
+            $('.status').text('Loading in files');
             setTimeout(function() {
                 $('.spinner').hide();
                 $('#start span').text('Grow Connections');
@@ -95,6 +97,7 @@ function visitLinkedin() {
                     .addClass('animated bounce')
                     .click(start);
                 animateHover($('#start'), 'pulse');
+                $('.status').text('Ready when you are');
             }, 2000);
         }
     });
@@ -116,6 +119,7 @@ function onLinkedin(done) {
 function showSpinner() {
     $('.spinner').show();
     $('#start span').text('');
+    $('.status').text('Visiting new profile pages');
 }
 
 function stopSpinner() {
@@ -126,6 +130,7 @@ function stopSpinner() {
         $('.main').hide();
         $('.options').show();
     });
+    $('.status').text('Done! If you want more you can try scrolling down the page for more users or refreshing.');
 }
 
 function animateHover($el, animation) {

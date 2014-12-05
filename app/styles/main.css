@@ -3,7 +3,12 @@ body {
     height: 300px;
 }
 header {
-    padding-bottom: 70px;
+    padding-bottom: 20px;
+}
+p {
+    text-align: center;
+    padding-bottom: 40px;
+    color: #1E1C1C;
 }
 .bg {
     background: url("../images/header.png") center center no-repeat;
